@@ -49,7 +49,7 @@ pipeline {
             post {
                 always {
                     // Generate Cucumber HTML reports
-                    cucumber buildStatus: 'UNSTABLE', jsonReportDirectory: 'target/cucumber-reports', skippedFails: true
+                    cucumber buildStatus: 'UNSTABLE', jsonReportDirectory: 'target/cucumber-reports'
                 }
             }
         }
