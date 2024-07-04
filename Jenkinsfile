@@ -30,7 +30,7 @@ pipeline {
 
         stage('Run Smoke Tests') {
             steps {
-                sh 'mvn clean test -Dtest=GETRunner'
+                sh 'mvn clean test -Dtest=SmokeRunner'
             }
         }
 
