@@ -52,6 +52,7 @@ Open target/cucumber-reports/cucumber.html in a web browser to view the HTML rep
 #### JSON Report:
 The JSON report is located at target/cucumber-reports/cucumber.json.
 
-### How to Add in Jenkins Pipeline
+
+## How to Add in Jenkins Pipeline
 Utilize JenkinsFile for Jenkins Pipeline Integration
 
