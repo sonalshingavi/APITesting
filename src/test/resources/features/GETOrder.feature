@@ -6,15 +6,15 @@ Feature: GETOrder
     Given  I perform GET operation for "/api/Order"
     Then I receive a valid HTTP response code 200
     And the response contains a list of orders
-   # And check one list response in detail
-    #And the response contains a list of orders
+    And check list response in detail
 
 
  @smoke
   Scenario: Verify GET Order by ID API with correct/valid OrderId
-    Given  I perform GET operation for "/api/Order/12"
+    Given  I perform GET operation for "/api/Order/120"
     Then I receive a valid HTTP response code 200
-    And the response contains the order details for Order ID 12
+    And the response contains the order details for Order ID 120
+    And check list response in detail
 
   @ignore
   Scenario: Negative Test - Verify Response of GET Order API when orders are empty

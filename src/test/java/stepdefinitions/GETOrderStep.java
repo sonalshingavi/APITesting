@@ -7,12 +7,19 @@ import io.restassured.response.Response;
 import models.Order;
 import org.testng.Assert;
 import utilities.RestAssuredExtension;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import org.testng.asserts.SoftAssert;
+import utilities.ValidateUtility;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class GETOrderStep<response> {
 
     Response response;
+    private Gson gson = new Gson();
 
     @Given("^I perform GET operation for \"([^\"]*)\"$")
     public void iPerformGETOperationFor(String uri) {
@@ -76,21 +83,44 @@ public class GETOrderStep<response> {
     @And("the response contains a list of orders")
     public void theResponseContainsAListOfOrders() {
 
-        List<Order> orders = response.jsonPath().getList(".", Order.class);
+        List<Order> orders = gson.fromJson(response.asString(), new TypeToken<List<Order>>(){}.getType());
         Assert.assertNotNull(orders, "The response does not contain a list of orders");
         Assert.assertTrue(orders.size() > 0, "The list of orders is empty");
 
-        // response.jsonPath().getString("name")
+        System.out.println("The list contains " + orders.size() + " orders. ");
+
     }
 
-    @And("check one list response in detail")
-    public void checkOneListResponseInDetail() {
-        List<Order> orders = response.jsonPath().getList(".", Order.class);
-        Assert.assertTrue(orders.size() > 0, "The list of orders is empty");
+    @And("check list response in detail")
+    public void checkListResponseInDetail() {
+        String responseBody = response.asString();
 
-        // Checking the first order in detail
-        Order firstOrder = orders.get(0);
-        //Assert.assertNotNull(firstOrder.getId(), "Order ID is null");
-       // Assert.assertNotNull(firstOrder.getName(), "Order Name is null");
+        // Check if the response is a list of orders or a single order
+        if (responseBody.startsWith("[")) {
+            // Convert response to list of orders
+            List<Order> orders = gson.fromJson(responseBody, new TypeToken<List<Order>>(){}.getType());
+
+            if (orders.size() > 0) {
+                // Checking the first order in detail
+                Order order = orders.get(0);
+                ValidateUtility.validateOrder(order);
+            } else {
+                System.out.println("No orders present to validate");
+            }
+        } else {
+            // Convert response to a single order
+            Order order = gson.fromJson(responseBody, Order.class);
+            ValidateUtility.validateOrder(order);
+        }
+//        // Convert response to list of orders
+//        List<Order> orders = gson.fromJson(response.asString(), new TypeToken<List<Order>>(){}.getType());
+
+//        if (!orders.isEmpty()) {
+//            // Checking the first order in detail
+//            Order order = orders.get(0);
+//            ValidateUtility.validateOrder(order);
+//        } else {
+//            System.out.println("No orders present to validate");
+//        }
     }
 }
