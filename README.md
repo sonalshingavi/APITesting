@@ -47,10 +47,10 @@ This project is designed for API testing using a combination of various testing 
 After running the tests, you can find the reports in the target/cucumber-reports directory.
 
 #### HTML Report:
-Open target/cucumber-reports/cucumber.html in a web browser to view the HTML report.
+Open `target/cucumber-reports/cucumber.html` in a web browser to view the HTML report.
 
 #### JSON Report:
-The JSON report is located at target/cucumber-reports/cucumber.json.
+The JSON report is located at `target/cucumber-reports/cucumber.json`.
 
 
 ## How to Add in Jenkins Pipeline
