@@ -33,25 +33,25 @@ This project is designed for API testing using a combination of various testing 
    
 ## How to Run Tests
 
-### Run smoke tests:
+#### Run smoke tests:
 `   mvn clean test -Dtest=SmokeRunner
 `
 
-### Run GET API Cases
+#### Run GET API Cases
   ` mvn clean test -Dtest=POSTRunner`
 
-### Run POST API Cases
+#### Run POST API Cases
    `mvn clean test -Dtest=POSTRunner`
 
 ## How to Check Reports
 After running the tests, you can find the reports in the target/cucumber-reports directory.
 
-### HTML Report:
+#### HTML Report:
 Open target/cucumber-reports/cucumber.html in a web browser to view the HTML report.
 
-### JSON Report:
+#### JSON Report:
 The JSON report is located at target/cucumber-reports/cucumber.json.
 
-## How to Add in Jenkins Pipeline
+### How to Add in Jenkins Pipeline
 Utilize JenkinsFile for Jenkins Pipeline Integration
 
