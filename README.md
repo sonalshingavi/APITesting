@@ -52,7 +52,12 @@ Open `target/cucumber-reports/cucumber.html` in a web browser to view the HTML r
 #### JSON Report:
 The JSON report is located at `target/cucumber-reports/cucumber.json`.
 
-
 ## How to Add in Jenkins Pipeline
 Utilize JenkinsFile for Jenkins Pipeline Integration
+
+#### Sample Reports
+
+![Smoke-Cucumber report](https://github.com/sonalshingavi/APITesting/assets/174613688/8cc529f0-0b72-424b-b659-66da8ea62666)
+
+![jenkinsReport](https://github.com/sonalshingavi/APITesting/assets/174613688/c1d8bc7b-1a98-4a9e-b727-b5d37e6b0249)
 
