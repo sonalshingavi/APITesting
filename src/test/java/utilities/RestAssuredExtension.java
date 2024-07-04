@@ -35,28 +35,6 @@ public class RestAssuredExtension {
     }
 
 
-
-//    /**
-//     * ExecuteAPI to execute the API for GET/POST/DELETE
-//     * @return ResponseOptions<Response>
-//     */
-//    public ResponseOptions<Response> ExecuteAPI() {
-//        RequestSpecification requestSpecification = builder.build();
-//        RequestSpecification request = RestAssured.given();
-//        request.contentType(ContentType.JSON);
-//        request.spec(requestSpecification);
-//
-//        if(this.method.equalsIgnoreCase(APIConstant.ApiMethods.POST))
-//            return request.post(this.url);
-//        else if(this.method.equalsIgnoreCase(APIConstant.ApiMethods.DELETE))
-//            return request.delete(this.url);
-//        else if(this.method.equalsIgnoreCase(APIConstant.ApiMethods.GET)) {
-//            System.out.println("***** url : " + this.url);
-//            return request.get(this.url);
-//        }
-//        return null;
-//       }
-
     /**
      * ExecuteAPI to execute the API for GET/POST/DELETE/PUT
      * @return ResponseOptions<Response>
@@ -67,10 +45,7 @@ public class RestAssuredExtension {
         request.contentType(ContentType.JSON);
         request.spec(requestSpecification);
 
-        System.out.println("Request Specification: " + requestSpecification.log().all());
-
-        System.out.println("Switch URL: " + this.url);
-
+        System.out.println("Request URL: " + this.url);
 
         switch (this.method.toUpperCase()) {
             case "POST":

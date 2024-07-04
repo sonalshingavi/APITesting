@@ -8,9 +8,6 @@ import io.restassured.specification.RequestSpecification;
 import models.Order;
 import org.testng.Assert;
 import utilities.RestAssuredExtension;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-
 import java.math.BigDecimal;
 
 public class POSTOrderStep {
@@ -34,8 +31,8 @@ public class POSTOrderStep {
 
     }
 
-    @Then("I I receive a valid HTTP response code {int}")
-    public void i_i_receive_a_valid_http_response_code(int statusCode) {
+    @Then("I receive a valid HTTP response code for POST {int}")
+    public void i_receive_a_valid_http_response_code_for_post(int statusCode) {
         System.out.println("response: " + response.getBody().prettyPrint());
         System.out.println("code: " + response.getStatusCode());
        Assert.assertEquals(response.getStatusCode(), statusCode);

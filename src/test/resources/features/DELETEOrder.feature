@@ -1,20 +1,35 @@
-#Feature: DELETE Order
-#  Verify DELETE operations using REST-assured for Order API
-#
-#  @smoke
-#  Scenario: Verify DELETE Order by ID API with correct/valid OrderId
-#    Given I perform DELETE operation for "/api/Order/12"
-#    Then I receive a valid HTTP response code 200
-#    And the response should indicate successful deletion
-#
-#  @negative
-#  Scenario: Negative Test: Verify Response of DELETE Order API with incorrect/invalid OrderId
-#    Given I perform DELETE operation for an invalid Order ID
-#    Then I receive a HTTP response code 404
-#    And the response should indicate the order does not exist or cannot be deleted
-#
-#  @negative
-#  Scenario: Negative Test: Verify Response of DELETE Order API with non-existent OrderId
-#    Given I perform DELETE operation for a non-existent Order ID
-#    Then I receive a HTTP response code 404
-#    And the response should indicate the order does not exist or cannot be deleted
+@ignore
+Feature: DELETEOrder
+  Verify different DELETE operations using REST-assured
+
+  @smoke
+  Scenario: Verify Successful Deletion of an Existing Order
+    Given I perform POST operation for "/api/Order" with body
+      | IsAdult  | TypeId | Quantity | Name           | Email             | Price |
+      | true     | 1      | 1        | sample string 4| sample string 5   | 3.40  |
+    And I Perform DELETE operation for "/api/Order/{Id}"
+    Then I receive a valid HTTP response code for delete 200
+    And I perform GET operation for "/api/Order/{Id}"
+    Then I receive a valid HTTP response code 404
+    And I "should not" see the body with Id as "101"
+
+  Scenario: Negative - Verify Deletion of a Non-Existent Order
+    Given I Perform DELETE operation for "/api/Order/{Id}"
+    Then I receive a valid HTTP response code for delete 404
+    And I should see the error message as "Order not found"
+
+  Scenario: Negative - Verify Deletion of an Already Deleted Order
+    Given I perform POST operation for "/api/Order" with body
+      | IsAdult  | TypeId | Quantity | Name           | Email             | Price |
+      | true     | 1      | 1        | user2          | user2@gmail.com   | 3.40  |
+    And I Perform DELETE operation for "/api/Order/{Id}"
+    And I Perform DELETE operation for "/api/Order/{Id}"
+    Then I receive a valid HTTP response code for delete 404
+    And I should see the error message as "Order not found"
+
+  Scenario: Negative - Verify Deletion with Invalid Order ID
+    Given I Perform DELETE operation for "/api/Order/{Id}"
+      | ID |
+      | invalid |
+    Then I receive a valid HTTP response code for delete 404
+    And I should see the error message as "Invalid Order ID"
