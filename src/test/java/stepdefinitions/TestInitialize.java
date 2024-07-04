@@ -8,6 +8,5 @@ public class TestInitialize {
     @Before
     public void TestSetup() {
         RestAssuredExtension restAssuredExtension = new RestAssuredExtension();
-        // Any additional setup can go here
     }
 }

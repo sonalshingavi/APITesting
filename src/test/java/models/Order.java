@@ -4,8 +4,6 @@ import lombok.Data;
 import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlRootElement;
 
-
-
 @XmlRootElement
 @Data
 public class Order {

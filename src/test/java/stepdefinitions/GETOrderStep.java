@@ -9,25 +9,19 @@ import org.testng.Assert;
 import utilities.RestAssuredExtension;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.testng.asserts.SoftAssert;
 import utilities.ValidateUtility;
-
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.regex.Pattern;
-
-public class GETOrderStep<response> {
+public class GETOrderStep {
 
     Response response;
-    private Gson gson = new Gson();
+    final Gson gson = new Gson();
 
-    @Given("^I perform GET operation for \"([^\"]*)\"$")
+    @Given("I perform GET operation for \"([^\"]*)\"$")
     public void iPerformGETOperationFor(String uri) {
 
         RestAssuredExtension restAssuredExtension = new RestAssuredExtension(uri, "GET");
         response = (Response) restAssuredExtension.ExecuteAPI();
     }
-
 
     @Then("I receive a valid HTTP response code {int}")
     public void validateHTTPResponseCode(int statusCode) {
@@ -39,7 +33,6 @@ public class GETOrderStep<response> {
 
         System.out.println("response: " + response.getBody().prettyPrint());
         Assert.assertEquals(response.jsonPath().getInt("Id"), orderId);
-        int id = response.jsonPath().getInt("Id");
         String name = response.jsonPath().getString("Name");
         Assert.assertNotNull(name);
     }
@@ -63,7 +56,7 @@ public class GETOrderStep<response> {
 
     @And("the response contains the error message {string}")
     public void theResponseContainsTheErrorMessage(String arg0) {
-        
+        // toDo
     }
 
     @And("the response contains an empty list of orders")
@@ -78,6 +71,7 @@ public class GETOrderStep<response> {
 
     @Then("I {string} see the body with Name as {string}")
     public void iSeeTheBodyWithNameAs(String isShould, String name) {
+        // toDo
     }
 
     @And("the response contains a list of orders")
@@ -85,10 +79,8 @@ public class GETOrderStep<response> {
 
         List<Order> orders = gson.fromJson(response.asString(), new TypeToken<List<Order>>(){}.getType());
         Assert.assertNotNull(orders, "The response does not contain a list of orders");
-        Assert.assertTrue(orders.size() > 0, "The list of orders is empty");
-
+        Assert.assertFalse(orders.isEmpty(), "The list of orders is empty");
         System.out.println("The list contains " + orders.size() + " orders. ");
-
     }
 
     @And("check list response in detail")
@@ -100,7 +92,7 @@ public class GETOrderStep<response> {
             // Convert response to list of orders
             List<Order> orders = gson.fromJson(responseBody, new TypeToken<List<Order>>(){}.getType());
 
-            if (orders.size() > 0) {
+            if (!orders.isEmpty()) {
                 // Checking the first order in detail
                 Order order = orders.get(0);
                 ValidateUtility.validateOrder(order);
@@ -112,15 +104,5 @@ public class GETOrderStep<response> {
             Order order = gson.fromJson(responseBody, Order.class);
             ValidateUtility.validateOrder(order);
         }
-//        // Convert response to list of orders
-//        List<Order> orders = gson.fromJson(response.asString(), new TypeToken<List<Order>>(){}.getType());
-
-//        if (!orders.isEmpty()) {
-//            // Checking the first order in detail
-//            Order order = orders.get(0);
-//            ValidateUtility.validateOrder(order);
-//        } else {
-//            System.out.println("No orders present to validate");
-//        }
     }
 }
