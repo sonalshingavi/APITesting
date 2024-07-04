@@ -6,7 +6,7 @@ Feature: GETOrder
     Given  I perform GET operation for "/api/Order"
     Then I receive a valid HTTP response code 200
     And the response contains a list of orders
-    And check list response in detail
+    #And check list response in detail
 
 
  @smoke

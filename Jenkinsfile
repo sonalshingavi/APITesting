@@ -30,23 +30,19 @@ pipeline {
 
         stage('Run Smoke Tests') {
             steps {
-                sh 'mvn clean test -Dcucumber.options="--tags @smoke"'
-            }
-            post {
-                always {
-                    // Generate Cucumber HTML reports
-                    cucumber buildStatus: 'UNSTABLE',
-                    fileIncludePattern: '**/cucumber.json',
-                    jsonReportDirectory: 'target/cucumber-reports'
-
-                }
+                sh 'mvn clean test -Dtest=SmokeRunner"'
             }
         }
-
 
     }
 
     post {
+        always {
+           // Generate Cucumber HTML reports
+              cucumber buildStatus: 'UNSTABLE',
+              fileIncludePattern: '**/cucumber.json',
+              jsonReportDirectory: 'target/cucumber-reports'
+           }
         success {
             echo 'Pipeline execution completed successfully!'
         }

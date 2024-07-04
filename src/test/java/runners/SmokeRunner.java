@@ -10,7 +10,7 @@ import io.cucumber.testng.CucumberOptions;
         plugin = {"pretty", "html:target/cucumber-reports/cucumber.html", "json:target/cucumber-reports/cucumber.json"} // Report plugins
 )
 
-public class TestRunner extends AbstractTestNGCucumberTests {
+public class SmokeRunner extends AbstractTestNGCucumberTests {
 
 }
 
