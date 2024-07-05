@@ -1,5 +1,4 @@
-# API Testing Project
-Experian restassured api
+# API Testing Automation with REST-assured and Cucumber BDD
 
 ## Project Details
 
@@ -22,14 +21,13 @@ This project is designed for API testing using a combination of various testing 
    cd APITesting
 
 2. Set up Java:
-   You can download it from here or use any other distribution.
 
 3. Install Maven:
 
 4. Install project dependencies:
    Run the following command to install all necessary dependencies:
    ```bash
-   cmd clean install
+   mvn clean install
    
 ## How to Run Tests
 
@@ -38,7 +36,7 @@ This project is designed for API testing using a combination of various testing 
 `
 
 #### Run GET API Cases
-  ` mvn clean test -Dtest=POSTRunner`
+  ` mvn clean test -Dtest=GETRunner`
 
 #### Run POST API Cases
    `mvn clean test -Dtest=POSTRunner`
